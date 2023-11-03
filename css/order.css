@@ -1,0 +1,208 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.body{
+    background-color: black;
+}
+#body{
+    background-color: white;
+}
+.navbar-brand{
+    font-family: 'Comforter Brush', cursive;
+}
+
+.bass{
+   margin-left: 15%;
+   margin-top: 1%;
+}
+.btn0{
+    border: 2px solid rgba(0, 0, 0, 0.697);
+    border-radius: 1rem;
+    font-weight: 500;
+    color: black;
+    height: 40px;
+    background-color: white;
+    width: 120px;
+    text-transform: capitalize;
+    margin-left: 2%;
+}
+.btn1{
+    border: 2px solid rgba(0, 0, 0, 0.697);
+    border-radius: 1rem;
+    font-weight: 500;
+    color: black;
+    background-color: white;
+    width: 120px;
+    text-transform: capitalize;
+    /* margin-left: 11%; */
+    margin-top: 2mm;
+    height: 40px;
+}
+.search{
+    border: 2px solid black;
+    height: 40px;
+    width: 320px;
+    margin-right: -52px;
+    border-radius: 60px
+}
+.nav-link{
+    font-size: 20px;
+    font-weight: 700 !important; 
+    text-transform: uppercase;
+    color: black !important;
+    
+}
+.dropdown-menu{
+    background-color: black !important;
+}
+.dropdown-menu a{
+    color: white;
+}
+.dropdown-menu a:active{
+    background-color: black !important;
+}
+.icon{
+    margin-left: 32%;
+    font-size: 20px;
+    margin-bottom: 0.3%; 
+}
+.icon a{
+    text-decoration: none;
+    color: black;
+}
+.navbut{
+    border: 2px solid black;
+    border-radius: 1rem;
+    color: white !important;
+    background-color: black;
+}
+.footer{
+    background-color: black;
+    /* height: 60vh; */
+    /* width: 100vw; */
+    padding-top: 40px;
+    color: white;
+    margin-top: 10%; 
+}
+.footer-content{
+    padding-top: 1%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.footer-bottom{
+    text-align: center;
+    font-size: 20px;
+}
+.footer-bottom span{
+     font-size: 10px; 
+}
+.socials{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 1rem 0 3rem 0;
+    margin-left: 1rem;
+}
+.socials li{
+    margin: 0 10px;
+}
+.socials a{
+    text-decoration: none;
+    color: white;
+}
+.socials a:hover{
+    color: white;
+}
+/* ==================== */
+.pro{
+    background-color: black;
+    padding-top: 5%;
+}
+.men{
+    text-align: center;
+    color: white;
+    text-transform: capitalize;
+    padding-top: 5%;
+    font-size: 50px;
+    font-weight: 500;
+    font-family: 'Amiri Quran', serif;
+}
+#men{
+    text-transform: uppercase;
+}
+#mek{
+    font-size: 20px;
+    margin-top: 2%;
+    font-weight: 500;
+    font-family: 'Amiri Quran', serif;
+}
+.product{
+    width: 100vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 2%;
+    background-color: white;
+    border-radius: 1rem;
+    /* font-size: 20px; */
+    font-weight: 500;
+    font-family: 'Amiri Quran', serif;
+   
+}
+
+
+.div1{
+    /* background-color: white; */
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 7%;
+    /* border-radius: 1rem; */
+}
+.pick{
+    padding-top: 4%;
+    padding-left: 5%;
+}
+.btn2{
+    border: 2px solid rgba(0, 0, 0, 0.697);
+    border-radius: 1rem;
+    font-weight: 500;
+    color: black;
+    background-color: white;
+    width: 200px;
+    text-transform: capitalize;
+    margin-left: 34%;
+   
+    margin-bottom: 4%;
+    /* margin-left: 11%; */
+    margin-top: 2mm;
+    height: 40px;
+}
+.hr{
+    border: 1% dotted black;
+    
+}
+.checkout{
+    font-size: 12px;
+    text-transform: capitalize;
+    font-weight: 500;
+    font-family: 'Amiri Quran', serif;
+    text-align: center;
+
+}
+#num{
+    border: 1px solid black;
+    border-radius: 5rem;
+    outline: none;
+    width: 20%;
+    
+}
+#ico{
+    position: absolute;
+    top: 40%;
+    left: 73%;
+}
+
