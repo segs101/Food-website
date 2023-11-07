@@ -197,14 +197,11 @@ input[type=checkbox] {
 }
 /* ------------------------styling banner--------------------- */
 
-.banner-body{
-    border: 1px solid green;
-    height: fit-content;
-    width:100%;
-    padding: 5% 0;
-  /* height:80%;  */
+.banner-body{ 
   height: fit-content;
-  border: 1px solid black;
+  width:100%;
+  padding: 5% 0;
+  height: fit-content;
   background:url(/img/banner.jpg);
   background-size:cover;
   background-repeat:no-repeat;
