@@ -1,0 +1,30 @@
+{% load static %}   
+<header>
+    <div class="container-fluid">
+        <div class="main-navbar">
+          <a href="" ><img src="{%static '/img/logo.png.png' %}" alt="Logo" class="logo"></a>
+          <input type="checkbox" id="checkbox_toggle" />
+          <label for="checkbox_toggle" class="hamburger">&#9776;</label>
+          <ul class="nav-links" id="nav-links">
+            <li class="nav-link"><a href="#">Home</a></li>
+            <li class="nav-link dropdown">
+              <a href="#">Dishes <i class="fa-solid fa-caret-down"></i></a>
+              <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 1</a>
+                <a href="#">Link 1</a>
+            </li>
+            <li class="nav-link"><a href="#">Book a table</a></li>
+            <li class="nav-link"><a href="#">orders</a></li>
+          </ul>
+          <div class="nav-button">
+            <div class="nav-link btn0">
+              <a href="/html/sign in.html" class="hvr-bounce-to-right">Sign In</a>
+            </div>
+            <div class="nav-link btn1">
+              <a href="#" class="hvr-bounce-to-right">Sign Out</a>
+            </div>
+          </div>
+        </div>
+    </div>
+</header>
