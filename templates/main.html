@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-  
+{%load static%}
 {% block content %}
 <!-- =====================================header=============================== -->
 <!-- =====================banner=========================== -->
@@ -16,36 +16,13 @@
 <!-- ========================================Category================================================ -->
 <div class="container">
   <div class="food-categ">
+    {% for item in category %}
     <div class=" food-logo">
-      <a href="/html/pasta.html"><img src=" " alt="">
-        <h6 class="text pt-2">pasta</h6>
+      <a href="{% url 'product' item.slug %}"><img src="{{item.pics.url}}" alt="food_icon">
+      <h6 class="text pt-2">{{item.food_name}}</h6>
       </a>
     </div>
-    <div class=" food-logo">
-      <a href="/html/pizza.html"><img src="" alt="">
-        <h6 class="text pt-2">pizza</h6>
-      </a>
-    </div>
-    <div class=" food-logo">
-      <a href="/html/pizza.html"><img src="" alt="">
-        <h6 class="text pt-2">pizza</h6>
-      </a>
-    </div>
-    <div class=" food-logo">
-      <a href="/html/chicken wings.html"><img src="/img/chicken-leg.png" alt="">
-        <h6 class="text pt-2">chicken wings</h6>
-      </a>
-    </div>
-    <div class=" food-logo">
-      <a href="/html/icecream.html"><img src="/img/ice-cream.png" alt="">
-        <h6 class="text pt-2">ice cream</h6>
-      </a>
-    </div>
-    <div class=" food-logo">
-      <a href="/html/drinks.html"><img src="/img/soda-can.png" alt="">
-        <h6 class="text pt-2">drinks</h6>
-      </a>
-    </div>
+    {% endfor %}
   </div>
 </div>
 <!-- =========================Pricing========================================== -->
@@ -230,7 +207,7 @@
       magnam.</h4>
   </div>
   <div class="about2 col-12 col-lg-6 col-md-6 col-sm-6" style="display: flex; flex-direction: column; align-items: center;">
-    <a href=""><img src="/img/260447566-01.png" alt="img" style="height: 300px;"></a>
+    <a href=""><img src="{%static '/img/260447566-01.png'%}" alt="img" style="height: 300px;"></a>
     <h4 class="text-capitalize">mr. david</h4>
   </div>
 </div>  

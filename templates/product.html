@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{%load static%}
+{% block content %}
+
+<div class="">
+  <div class="product">
+    <div class="product-head">
+      <h1>{{foodbrand.food_name}} menu</h1>
+      <p>{{foodbrand.description}}</p>
+    </div>
+    <div class="product-card">
+      {% for item in product%}
+      <div class="each-card">
+        <img src="{{item.pics.url}}" alt="">
+        <div class="detail-side">
+          <h3 class="text-capitalize">{{item.product_name}}</h3>
+          <p class="text-capitalize">{{item.description}}</p>
+          <p class="mt-4">${{item.price}}</p>
+          <button type="submit" class="btn2 mb-4 mt-3">add to cart</button>
+        </div>
+      </div>
+      {% endfor %}        
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

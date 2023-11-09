@@ -10,9 +10,10 @@
             <li class="nav-link dropdown">
               <a href="#">Dishes <i class="fa-solid fa-caret-down"></i></a>
               <div class="dropdown-content">
-                <a href="#">Link 1</a>
-                <a href="#">Link 1</a>
-                <a href="#">Link 1</a>
+                {% for item in category %}
+                <a href="{% url 'product' item.slug %}">{{item.food_name}} Menu</a>
+                {% endfor %}
+                
             </li>
             <li class="nav-link"><a href="#">Book a table</a></li>
             <li class="nav-link"><a href="#">orders</a></li>
