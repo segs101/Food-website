@@ -8,8 +8,11 @@ class CategoryAdmin(admin.ModelAdmin):
     
 class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('product_name',)}
-    list_display = ['product_name', 'pics', 'price', 'description', 'slug']  
+    list_display = ['type','product_name', 'pics', 'price', 'description']  
     
-    
+class Home_ContactAdmin(admin.ModelAdmin):
+    list_display = ['id','name','email', 'message','submit_date']
+     
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Home_Contact, Home_ContactAdmin)

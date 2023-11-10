@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import EmailValidator
 import datetime
 today = datetime.date.today()
 year = today.year
@@ -25,3 +26,13 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
+    
+class Home_Contact(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField(
+        validators=[EmailValidator(message="Invalid email address")]
+    )
+    message =  models.TextField()
+    submit_date = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.name

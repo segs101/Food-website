@@ -231,29 +231,28 @@
           </div>
         </div>
         <div class="col-lg-6 contact-form">
-          <form class="contact1">
+          <form action="{% url 'home' %}" class="contact1"  method="POST">
+            {% csrf_token %}
             <!-- Name input -->
             <div class="form mb-4">
-            <input type="text" placeholder="Enter your Name">
+              <input type="text" name="name" placeholder="Enter your Name">
             </div>
           
             <!-- Email input -->
             <div class="form mb-4">
-              <input type="email" placeholder="Enter your Email"/>
+              <input type="email" name="email" placeholder="Enter your Email"/>
             </div>
           
             <!-- Message input -->
             <div class="form mb-4">
-              <textarea rows="4" placeholder="Enter Your Message "></textarea>
+              <textarea rows="4" name="message" placeholder="Enter Your Message "></textarea>
             </div>
-
-            
-            
+            <button type="submit" class="contact-button">Send</button>
           </form>
         </div>
       </div>
       <!-- Submit button -->
-      <button type="submit" class="contact-button">Send</button>
+      
     </div>
   </div>
 </div>

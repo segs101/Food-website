@@ -195,11 +195,18 @@ input[type=checkbox] {
     padding-right: 70px;
   }
 }
+/* ----------------------------styling alret---------------------- */
+#alert p{
+    font-family: 'Kanit', sans-serif; 
+    font-size: 20px;
+    text-transform: capitalize;
+}
 /* ------------------------styling banner--------------------- */
 
 .banner-body{ 
   height: fit-content;
   width:100%;
+  margin: 0;
   padding: 5% 0;
   height: fit-content;
   background:url(/static/img/banner.jpg);
