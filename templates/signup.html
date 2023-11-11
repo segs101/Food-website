@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <!-- ======================content========================== -->
+  <form action="{% url 'signup' %}" method="post">
+    {% csrf_token %}
+    <div class="auth">
+      <div class="auth-card">
+        <h3 class="pt-4">Sign up</h3>
+        <div class="auth-input">
+          <input type="name" name="full_name" required="required" placeholder="full name">
+        </div>
+        
+        <div class="auth-input">
+          <input type="email" name="email" required="required" placeholder="e-mail">
+        </div>
+        
+        <div class="auth-input">
+          <input type="text" name="address" required="required" placeholder="address">
+        </div>
+        
+        
+        
+        <div class="auth-input">
+          <input type="password" name="password1" required="required" placeholder="password">
+        </div>
+        
+        <div class="auth-input">
+          <input type="password" name="password2" required="required" placeholder="confirm password">
+        </div>
+        
+        <div class="auth-link">
+          <p>already have an account? <a href="">sign in instead</a> </p>
+        </div>
+        
+        <button type="submit" class="enter">Submit</button>
+      </div>
+    </div>   
+  </form>
+  
+{% endblock content %}

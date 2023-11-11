@@ -1,14 +1,13 @@
 from django.db import models
 from django.core.validators import EmailValidator
-import datetime
-today = datetime.date.today()
-year = today.year
+from django.contrib.auth.models import AbstractUser
+
 
 # Create your models here.
 
 class Category(models.Model):
     food_name = models.CharField(max_length=50) 
-    pics = models.ImageField(upload_to='pics', default='')
+    pics = models.ImageField(upload_to="category_pics")
     description = models.TextField(null=True)
     slug = models.SlugField(unique=True)
 
@@ -19,7 +18,7 @@ class Category(models.Model):
 class Product(models.Model):
     type = models.ForeignKey(Category, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=100)
-    pics = models.ImageField(upload_to='product_pics')
+    pics = models.ImageField(upload_to="product_pics")
     price = models.IntegerField()
     description = models.TextField(max_length=100)
     slug = models.SlugField()
@@ -27,6 +26,21 @@ class Product(models.Model):
     def __str__(self):
         return self.product_name
     
+    
+class User(AbstractUser):
+    full_name = models.CharField(max_length=200, null=True)
+    email = models.EmailField(unique=True)
+    # ignore the username field it only for the superusers
+    username = models.CharField(unique=False, max_length=100, null=True, default='')
+    address = models.CharField(max_length=200, null=True)
+    avatar = models.ImageField(null=True, upload_to="profile_pics", default="profile_pics/avatar.png")
+    joined = models.DateTimeField(auto_now_add=True)
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
+    def __str__(self):
+        return self.username
+    
+
 class Home_Contact(models.Model):
     name = models.CharField(max_length=30)
     email = models.EmailField(

@@ -7,9 +7,9 @@
   <div class="container-fluid banner-body banner">
     <h1 class="col-lg-6 col-sm-12 header1">Discover an array of quick, mouthwatering bites at our fast-food haven, where speed meets flavor, all served up for your
     satisfaction</h1>
-    <div class="">
-      <button class="banner-button">Order Now</button>
-      <button class="banner-button">book a table</button>
+    <div>
+      <a href="{% url 'book_table' %}"><button class="banner-button">Order Now</button></a>
+      <a href="{% url 'book_table' %}"><button class="banner-button">book a table</button></a>
     </div>
   </div>
 </div>

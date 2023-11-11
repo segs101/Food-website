@@ -92,6 +92,9 @@ input[type=checkbox] {
     gap: 1rem;
     text-decoration: none;
 }
+.respon-button{
+    display: none !important;
+}
 /* nav-signin button */
 .btn0 a{
     border: 1px solid #272829;
@@ -181,6 +184,7 @@ input[type=checkbox] {
     display: block;
     background-color: #D8D9DA;
     top: 50px; 
+    z-index: 888;
   }
 
   .hamburger {
@@ -194,6 +198,11 @@ input[type=checkbox] {
   .header1{
     padding-right: 70px;
   }
+
+  .respon-button{
+    display: block !important;
+    margin-left: 40% !important;
+}
 }
 /* ----------------------------styling alret---------------------- */
 #alert p{
@@ -715,10 +724,13 @@ input[type=checkbox] {
   border: 2px solid #3B3B3B;
   border-radius: 8px;
 }
-
+.auth-link{
+  text-transform: capitalize;
+  font-family: 'Titillium Web', sans-serif;
+}
 .enter{
   height: 45px;
-  width: 100px;
+  width: 100%;
   border-radius: 5px;
   border: 2px solid #000;
   cursor: pointer;

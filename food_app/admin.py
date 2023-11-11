@@ -12,7 +12,11 @@ class ProductAdmin(admin.ModelAdmin):
     
 class Home_ContactAdmin(admin.ModelAdmin):
     list_display = ['id','name','email', 'message','submit_date']
+    
+class UserAdmin(admin.ModelAdmin):
+    list_display = ['id','email', 'joined']
      
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Home_Contact, Home_ContactAdmin)
+admin.site.register(User, UserAdmin)

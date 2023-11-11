@@ -1,44 +1,63 @@
 {% load static %}   
 <header>
-    <div class="container-fluid">
-        <div class="main-navbar">
-          <a href="{% url 'home'  %}" ><img src="{%static '/img/logo.png.png' %}" alt="Logo" class="logo"></a>
-          <input type="checkbox" id="checkbox_toggle" />
-          <label for="checkbox_toggle" class="hamburger">&#9776;</label>
-          <ul class="nav-links" id="nav-links">
-            <li class="nav-link"><a href="{% url 'home' %}">Home</a></li>
-            <li class="nav-link dropdown">
-              <a href="#">Dishes <i class="fa-solid fa-caret-down"></i></a>
-              <div class="dropdown-content">
-                {% for item in category %}
-                <a href="{% url 'product' item.slug %}">{{item.food_name}} Menu</a>
-                {% endfor %}
-                
-            </li>
-            <li class="nav-link"><a href="{% url 'book_table' %}">Book a table</a></li>
-            <li class="nav-link"><a href="#">orders</a></li>
-          </ul>
-          <div class="nav-button">
-            <div class="nav-link btn0">
-              <a href="/html/sign in.html" class="hvr-bounce-to-right">Sign In</a>
-            </div>
-            <div class="nav-link btn1">
-              <a href="#" class="hvr-bounce-to-right">Sign Out</a>
-            </div>
+  <div class="container-fluid">
+    <div class="main-navbar">
+      <a href="{% url 'home'  %}" ><img src="{%static '/img/logo.png.png' %}" alt="Logo" class="logo"></a>
+      {% if user.is_authenticated %}
+      <div class="respon-button btn0 nav-link">
+        <a href="{% url 'logout' %}" class="hvr-bounce-to-right">Sign out</a>
+      </div>
+      {% else %}
+      <div class="respon-button btn0 nav-link">
+        <a href="{% url 'login' %}" class="hvr-bounce-to-right">Sign in</a>
+      </div>
+      {% endif %}
+      <input type="checkbox" id="checkbox_toggle" />
+      <label for="checkbox_toggle" class="hamburger">&#9776;</label>
+      <ul class="nav-links" id="nav-links">
+        <li class="nav-link"><a href="{% url 'home' %}">Home</a></li>
+        <li class="nav-link dropdown">
+          <a>Dishes <i class="fa-solid fa-caret-down"></i></a>
+          <div class="dropdown-content">
+            {% for item in category %}
+            <a href="{% url 'product' item.slug %}">{{item.food_name}} Menu</a>
+            {% endfor %}
           </div>
+        </li>
+        <li class="nav-link"><a href="{% url 'book_table' %}">Book a table</a></li>
+        <li class="nav-link"><a href="#">orders</a></li>
+      </ul>
+      <div class="nav-button">
+        <div class="nav-link btn0">
+          <a href="{% url 'login' %}" class="hvr-bounce-to-right">Sign In</a>
         </div>
+        {% if user.is_authenticated %}
+        <div class="nav-link btn1">
+          <a href="{% url 'logout'  %}" class="hvr-bounce-to-right">Sign Out</a>
+        </div>
+        {% else %}
+        <div class="nav-link btn1">
+          <a href="{% url 'signup'  %}" class="hvr-bounce-to-right">Sign up</a>
+        </div>
+        {% endif %}
+      
+        
+      </div>
     </div>
+  </div>
 </header>
 <script type="text/javascript">
-    setTimeout(function () {
-
-        // Closing the alert
-        $('#alert').alert('close');
-    }, 5000);
+  setTimeout(function () {
+      // Fading out the alert with animation
+      $('#alert').fadeOut(1000, function () {
+          // Closing the alert after the fade-out animation completes
+          $(this).alert('close');
+      });
+  }, 5000);
 </script> 
 {% if messages %}
   {% for message in messages %}
-  <div id="alert" class="alert {{ message.tags }} mb-0">
+  <div id="alert" class="alert {{ message.tags }} mb-0 rounded-0">
     <p>{{message}}</p>
   </div>
   {% endfor %}
