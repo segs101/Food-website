@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+  {% load static %}
+  {% load humanize %}
+  <!-- ======================content========================== -->
+  {% block content %}
+  
+  <div class="container cartty">
+    <div class="cart">
+      <h1 class="text-center text-capitalize mb-3">summary</h1>
+      <hr>
+      
+      {% for item in cart_item %}
+        <div class="each-cart">
+          <div class="cart-img">
+            <a href=""><img src="{{ item.product.pics.url }}" alt="food-img"></a>
+          </div>
+          <div class="each-cart-details">
+            <h3 class="text-capitalize">{{ item.product.product_name }}</h3>
+            <h6 class="text-capitalize mt-3">{{ item.product.description }}</h6>
+            <h6 class="mt-4">₦{{ item.product.price|intcomma }}</h6>
+            <div class="">
+              <p>quantity: {{ item.quantity }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      <hr class="hr">
+      <div class="checkout">
+        <div class="cart-summary">
+          <h3>Full Name: {{ request.user.full_name }}</h3>
+          <h3>Address: {{ request.user.address }}</h3>
+          <h3>Phone number: 07022115623</h3>
+        </div>
+        <hr class="hr">
+        <div class="cart-summary">
+          <form action="{% url 'checkout' %}" method="post">
+            {% csrf_token %}
+            <p>Discount code: <input type="text" name="discount"></p>
+          </form>
+          <h3>Amount: ₦{{ amount|intcomma }}</h3>
+          <h3>Discount: ₦{{ discount|intcomma }}</h3>
+          <h3>delivery fee: ₦{{delivery_fee|intcomma}}</h3>
+          <h3>total: ₦{{ total_amount|intcomma }}</h3>
+        </div>
+      </div>
+      <form action="{% url 'pay' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="summary-btn">pay</button>
+      </form>
+      
+    </div>
+  
+  </div>
+  
+  {% endblock content %}

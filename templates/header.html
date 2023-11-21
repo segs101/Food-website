@@ -1,5 +1,5 @@
 {% load static %}   
-<header>
+<header class="sticky-top">
   <div class="container-fluid">
     <div class="main-navbar">
       <a href="{% url 'home'  %}" ><img src="{%static '/img/logo.png.png' %}" alt="Logo" class="logo"></a>
@@ -25,23 +25,25 @@
           </div>
         </li>
         <li class="nav-link"><a href="{% url 'book_table' %}">Book a table</a></li>
-        <li class="nav-link"><a href="#">orders</a></li>
+        {% if user.is_authenticated %}
+        <li class="nav-link"><a href="{% url 'profile' %}">profile</a></li>
+        {% endif %}
+        <li class="nav-link"><a href="{% url 'cart' %}"><i class="fa badge" value={{order_item_count}}>&#xf07a;</i></a></li>
       </ul>
       <div class="nav-button">
-        <div class="nav-link btn0">
-          <a href="{% url 'login' %}" class="hvr-bounce-to-right">Sign In</a>
-        </div>
+        
         {% if user.is_authenticated %}
         <div class="nav-link btn1">
           <a href="{% url 'logout'  %}" class="hvr-bounce-to-right">Sign Out</a>
         </div>
         {% else %}
+        <div class="nav-link btn0">
+          <a href="{% url 'login' %}" class="hvr-bounce-to-right">Sign In</a>
+        </div>
         <div class="nav-link btn1">
           <a href="{% url 'signup'  %}" class="hvr-bounce-to-right">Sign up</a>
         </div>
         {% endif %}
-      
-        
       </div>
     </div>
   </div>
@@ -57,7 +59,7 @@
 </script> 
 {% if messages %}
   {% for message in messages %}
-  <div id="alert" class="alert {{ message.tags }} mb-0 rounded-0">
+  <div id="alert" class="alert {{ message.tags }} mb-0 rounded-0 sticky-top">
     <p>{{message}}</p>
   </div>
   {% endfor %}

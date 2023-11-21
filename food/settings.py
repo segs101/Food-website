@@ -47,8 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    'food_app' 
+    'django.contrib.humanize',
+    'food_app',
 ]
 
 MIDDLEWARE = [
@@ -74,6 +74,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'food_app.context_processors.site_settings',
+                'food_app.context_processors.order_item_count',
+
             ],
         },
     },
@@ -139,3 +142,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # For Deployment
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+PAYSTACK_TEST_SECRETE_KEY = os.environ.get('paystack_secret_key')
+PAYSTACK_TEST_PUBLIC_KEY = os.environ.get('paystack_public_key')
+PAYSTACK_INITIALIZE_PAYMENT_URL = 'https://api.paystack.co/transaction/initialize'

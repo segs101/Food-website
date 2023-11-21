@@ -1,142 +1,61 @@
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Food Cafe</title>
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
-  <!-- =====================================header=============================== -->
-  <header>
-    <div class="container-fluid">
-      <div class="main-navbar">
-        <a href=""><img src="/img/logo.png.png" alt="Logo" class="logo"></a>
-        <input type="checkbox" id="checkbox_toggle" />
-        <label for="checkbox_toggle" class="hamburger">&#9776;</label>
-        <ul class="nav-links" id="nav-links">
-          <li class="nav-link"><a href="#">Home</a></li>
-          <li class="nav-link dropdown">
-            <a href="#">Dishes <i class="fa-solid fa-caret-down"></i></a>
-            <div class="dropdown-content">
-              <a href="#">Link 1</a>
-              <a href="#">Link 1</a>
-              <a href="#">Link 1</a>
-          </li>
-          <li class="nav-link"><a href="#">Book a table</a></li>
-          <li class="nav-link"><a href="#">orders</a></li>
-        </ul>
-        <div class="nav-button">
-          <div class="nav-link btn0">
-            <a href="/html/sign in.html" class="hvr-bounce-to-right">Sign In</a>
-          </div>
-          <div class="nav-link btn1">
-            <a href="#" class="hvr-bounce-to-right">Sign Out</a>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </header>
+{% extends 'base.html' %}
+  {% load static %}
+  {% load humanize %}
   <!-- ======================content========================== -->
+  {% block content %}
   <div class="container cartty">
     <div class="cart">
-      <h1 class="text-center text-capitalize mb-3">summary</h1>
+      <h1 class="text-center text-capitalize mb-3">cart</h1>
       <hr>
-      <div class="each-cart">
-        <a href=""><img src="/img/burger.jpg" alt=""></a>
-        <div class="each-cart-details">
-          <h3 class="text-capitalize">pizza doritos <span><i class="bi bi-x-octagon"></i></span></h3>
-          <h6 class="text-capitalize mt-3">Tomato sauce, mozzarella & oregano</h6>
-          <h6 class="mt-4">$18.00</h6>
-          <div class="cart-btn">
-            <i class="bi bi-dash-circle"id="decrement"></i>
-            <input type="number" id="numberInput" value="0" min="0">
-            <i class="bi bi-plus-circle" id="increment"></i>
+      {% if not cart_item %}
+        <h5 class="text-center"> No item found</h5>
+      {% else %}
+        {% for item in cart_item %}
+
+          <div class="each-cart">
+            <div class="cart-img">
+              <a href=""><img src="{{ item.product.pics.url }}" alt="food-img"></a>
+            </div>
+            <div class="each-cart-details">
+              <h3 class="text-capitalize">{{ item.product.product_name }}
+                <form action="{% url 'remove-from-cart' item.product.id %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit"><span><i class="bi bi-x-octagon" ></i></span></button>
+                </form> 
+              </h3>
+              <h6 class="text-capitalize mt-3">{{ item.product.description }}</h6>
+              
+              <h6 class="mt-4">₦{{ item.product.price|intcomma}}</h6>
+              <div class="cart-btn">
+                <form action="{% url 'decrease-cart-item' item.product.id %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit"><span><i class="bi bi-dash-circle" id="decrement "></i></span></button>
+                </form>
+                <form action="{% url 'update-cart-item' item.product.id %}" method="post">
+                  {% csrf_token %}
+                  <input type="number" name="num" id="numberInput" value="{{ item.quantity }}" min="0">
+                </form>
+                
+                <form action="{% url 'increase-cart-item' item.product.id %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit"><span><i class="bi bi-plus-circle" id="increment"></i></span></button>
+                </form>
+                
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="each-cart">
-        <a href=""><img src="/img/pasta.jpg" alt=""></a>
-        <div class="each-cart-details">
-          <h3 class="text-capitalize">pizza doritos <span><i class="bi bi-x-octagon"></i></span></h3>
-          <h6 class="text-capitalize mt-3">Tomato sauce, mozzarella & oregano</h6>
-          <h6 class="mt-4">$18.00</h6>
-          <div class="cart-btn">
-            <i class="bi bi-dash-circle" id="decrement"></i>
-            <input type="number" id="numberInput" class="input" value="0" min="0">
-            <i class="bi bi-plus-circle" id="increment"></i>
-          </div>
-        </div>
-      </div>
-      <div class="each-cart">
-        <a href=""><img src="/img/1353.jpg" alt=""></a>
-        <div class="each-cart-details">
-          <h3 class="text-capitalize">pizza doritos <span><i class="bi bi-x-octagon"></i></span></h3>
-          <h6 class="text-capitalize mt-3">Tomato sauce, mozzarella & oregano</h6>
-          <h6 class="mt-4">$18.00</h6>
-          <div class="cart-btn">
-            <i class="bi bi-dash-circle" id="decrement"></i>
-            <input type="number" id="numberInput" value="0" min="0">
-            <i class="bi bi-plus-circle" id="increment"></i>
-          </div>
-        </div>
-      </div>
-      <div class="each-cart">
-        <a href=""><img src="/img/chicken-wings.jpg" alt=""></a>
-        <div class="each-cart-details">
-          <h3 class="text-capitalize">pizza doritos <span><i class="bi bi-x-octagon"></i></span></h3>
-          <h6 class="text-capitalize mt-3">Tomato sauce, mozzarella & oregano</h6>
-          <h6 class="mt-4">$18.00</h6>
-          <div class="cart-btn">
-            <i class="bi bi-dash-circle" id="decrement"></i>
-            <input type="number" id="numberInput" value="0" min="0">
-            <i class="bi bi-plus-circle" id="increment"></i>
-          </div>
-        </div>
-      </div>
+        {% endfor %}
+      {% endif %}
       <hr class="hr">
       <div class="checkout">
         <div class="cart-summary">
-          <h3>Discount: $10.00</h3>
-          <h3>delivery fee: $2.00</h3>
-          <h3>total: $50.00</h3>
+          <h3>subtotal: ₦{{ amount|intcomma}}</h3>
         </div>
       </div>
-      <button type="submit" class="summary-btn">check out</button>
+      {% if cart_item %}
+      <a href="{% url 'checkout' %}"><button type="submit" class="summary-btn">check out</button></a>
+      {% endif %}
     </div>
   
   </div>
-  <!-- ============================Footer======================================== -->
-  <div class="footer">
-    <div class="footer-content">
-      <a class="navbar-brand mt-1" href="#" style="font-size: 30px;"><img src="/img/logo.png.png" alt=""></a>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.aseriores nesciunt consequuntur inventore animi quidem
-        aliquid numquam eos eligendi offilne.</p>
-      <ul class="socials list-unstyled">
-        <li><a href=""><i class="bi bi-facebook"></i></a></li>
-        <li><a href=""><i class="bi bi-instagram"></i></a></li>
-        <li><a href=""><i class="bi bi-youtube"></i></a></li>
-        <li><a href=""><i class="bi bi-twitter"></i></a></li>
-      </ul>
-      <hr>
-      <div class="footer-bottom">
-        <p>copyright &copy;2022 <span><a class="navbar-brand mt-1" href="#" style="font-size: 30px;">FoodHub</a></span>
-          .designed by <span class="text-capitalize">|<a href="" class="text-decoration-none text-white">balogun
-              segun</a></span></p>
-      </div>
-    </div>
-  </div>
-  <script src="/js/main.js"></script>
-  <script src="https://kit.fontawesome.com/bdb8ba5466.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
-    </script>
-</body>
-
-</html>
+  {% endblock content %}

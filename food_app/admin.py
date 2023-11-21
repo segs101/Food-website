@@ -16,7 +16,14 @@ class Home_ContactAdmin(admin.ModelAdmin):
 class UserAdmin(admin.ModelAdmin):
     list_display = ['id','email', 'joined']
      
+class CartAdmin(admin.ModelAdmin):
+    list_display = ['id','cart', 'product', 'quantity', 'amount']
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Home_Contact, Home_ContactAdmin)
 admin.site.register(User, UserAdmin)
+admin.site.register(Cart)
+admin.site.register(CartItem, CartAdmin)
+admin.site.register(Order)
+admin.site.register(OrderItem)
