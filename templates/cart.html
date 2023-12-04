@@ -3,7 +3,7 @@
   {% load humanize %}
   <!-- ======================content========================== -->
   {% block content %}
-  <div class="container cartty">
+  <div class=" cartty">
     <div class="cart">
       <h1 class="text-center text-capitalize mb-3">cart</h1>
       <hr>
@@ -11,20 +11,19 @@
         <h5 class="text-center"> No item found</h5>
       {% else %}
         {% for item in cart_item %}
-
           <div class="each-cart">
             <div class="cart-img">
-              <a href=""><img src="{{ item.product.pics.url }}" alt="food-img"></a>
+              <img src="{{ item.product.pics.url }}" alt="food-img">
             </div>
             <div class="each-cart-details">
-              <h3 class="text-capitalize">{{ item.product.product_name }}
+              <div class="d-flex justify-content-between b-octagon">
+                <h3>{{ item.product.product_name }}</h3>
                 <form action="{% url 'remove-from-cart' item.product.id %}" method="post">
                   {% csrf_token %}
                   <button type="submit"><span><i class="bi bi-x-octagon" ></i></span></button>
                 </form> 
-              </h3>
+              </div>
               <h6 class="text-capitalize mt-3">{{ item.product.description }}</h6>
-              
               <h6 class="mt-4">₦{{ item.product.price|intcomma}}</h6>
               <div class="cart-btn">
                 <form action="{% url 'decrease-cart-item' item.product.id %}" method="post">
@@ -35,7 +34,7 @@
                   {% csrf_token %}
                   <input type="number" name="num" id="numberInput" value="{{ item.quantity }}" min="0">
                 </form>
-                
+
                 <form action="{% url 'increase-cart-item' item.product.id %}" method="post">
                   {% csrf_token %}
                   <button type="submit"><span><i class="bi bi-plus-circle" id="increment"></i></span></button>

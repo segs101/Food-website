@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
+from dotenv import load_dotenv
 
 
 MESSAGE_TAGS = {
@@ -145,9 +146,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # For Deployment
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
+# Load secret .env file
+load_dotenv()
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-PAYSTACK_TEST_SECRETE_KEY = 'sk_test_1875a2f885e372d3d20aa730017e9a0251a2475d'
-PAYSTACK_TEST_PUBLIC_KEY = 'pk_test_7c0dad3790ff25843e01a041327bc9972ea2bf6a'
+PAYSTACK_TEST_SECRETE_KEY = os.getenv('PAYSTACK_TEST_SECRETE_KEY')
+PAYSTACK_TEST_PUBLIC_KEY = os.getenv('PAYSTACK_TEST_PUBLIC_KEY')
 PAYSTACK_INITIALIZE_PAYMENT_URL = 'https://api.paystack.co/transaction/initialize'
 
 # Emailing settings
@@ -155,8 +158,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'balogunsegunweb@gmail.com'
-EMAIL_HOST_PASSWORD = 'bxbu jfff injh ibld'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 PASSWORD_RESET_TIMEOUT = 14400
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
