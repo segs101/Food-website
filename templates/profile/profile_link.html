@@ -1,0 +1,10 @@
+<!-- profile_links.html -->
+<div class="profile-link">
+    <div {% if request.path == '/profile' %}class="active-link"{% endif %}><a href="{% url 'profile' %}">Information</a></div>
+    <div  {% if request.path == '/orders' %}class="active-link"{% endif %}><a href="{% url 'orders' %}">orders</a></div>
+    <div {% if request.path == '/reservation' %}class="active-link"{% endif %}><a href="{% url 'reservation' %}">Reservation</a></div>
+    {% if request.user.is_superuser %}
+        <div {% if request.path == '/sitecontrol/category' %}class="active-link"{% endif %}><a href="{% url 'category' %}">category</a></div>
+        <div {% if request.path == '/sitecontrol/product' %}class="active-link"{% endif %}><a href="{% url 'product' %}">product</a></div>
+    {% endif %}
+</div>

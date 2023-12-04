@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load humanize %}
+<!-- ================================================ -->
+{% block content %}
+  <div class="profile">
+    {% include 'profile/profile_link.html' %}
+    <div class="profile-order">
+      {% if not order_item  %}
+        <p>no order yet</p>
+        <a href="">order now</a>
+      {% else  %}
+        {% for order in order_item  %}
+          <div class="each-order">
+            <div class="each-order-img">
+              <img src="{{order.product.pics.url}}" alt="food-img">
+            </div>
+            <div class="each-order-details">
+              <div class="d-flex flex-wrap gap-2">
+                <h4>{{order.quantity}}x{{order.product}}</h4>
+                {% if request.user.is_superuser %}
+                  <p>{{order.order}}</p>
+                {% endif %} 
+              </div>
+              <p class="pb-2">₦{{order.item_total|intcomma }}</p>
+              <div class="each-order-details-opt">
+                <p class="">{{order.order.created_at}}</p>
+                <p class="">✔✔delivered</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif  %}
+		</div>
+  </div>
+{% endblock content %}

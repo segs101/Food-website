@@ -1,15 +1,18 @@
-from django.shortcuts import render, redirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import PasswordChangeForm
 from django.conf import settings
+from django.contrib.auth.decorators import user_passes_test
+
+from admin_app.views import is_admin_or_superuser
 from . forms import *
 from . models import *
 from random import randint
 import uuid
-import json
 import requests
+import os
 
 
 # Create your views here.
@@ -80,10 +83,12 @@ def loginPage(request):
             messages.error(request, 'User does not exist   sign up instead')
             return redirect("signup")
         
-    
         user = authenticate(request, email=email, password=password)
-
-        if user:
+        
+        if user and user.is_superuser:
+            login(request, user)
+            return redirect('profile')
+        elif user:
             login(request, user)
             messages.success(request, 'Welcome back 🎉🎉')
             return redirect('home')
@@ -94,7 +99,6 @@ def loginPage(request):
     }
     return render(request, 'signin.html', context)   
 
-
 def logoutUser(request):
     logout(request)
     messages.success(request, "sign out successfully, come back soon we'll be waiting 😉😉")
@@ -102,15 +106,23 @@ def logoutUser(request):
 
 @login_required(login_url='login')
 def book_table(request):
+    form = TableForm()
+    if request.method == "POST":
+        form = TableForm(request.POST)
+        print(request.POST)
+        if form.is_valid():
+            table_instance = form.save(commit=False)
+            table_instance.user = request.user# Assign the user to the table instance
+            # print(table_instance)
+            table_instance.save()
+            messages.success(request, "Table booked successfully")
+        else:
+            print(form.errors)
+            messages.error(request, "error")
     context = {
+        "form":form,
     }
     return render(request, 'book-table.html', context)
-
-def get_order_item_count(request):
-    cart = request.user.cart
-    cart_items = CartItem.objects.filter(cart=cart)
-    order_item_count = cart_items.count()
-    return order_item_count
 
 @login_required(login_url='login')
 def cart(request):
@@ -188,8 +200,6 @@ def update_cart_item(request, product_id):
             cart_item.save()
         return redirect('cart')
     
-
-
 @login_required(login_url='login')
 def check_out(request):
     cart = request.user.cart
@@ -225,12 +235,9 @@ def check_out(request):
     }
     return render(request, 'checkout.html', context)
 
-
-
-
-
 def pay(request):
     global api_key
+    print(os.environ.get('paystack_public_key'))
     curl = settings.PAYSTACK_INITIALIZE_PAYMENT_URL
     if request.method == 'POST':
         user = request.user
@@ -277,9 +284,7 @@ def pay(request):
         except:
             pass
         return redirect('checkout')
-    
-
-            
+             
 def payment_success(request):
     user = request.user
     cart = user.cart
@@ -314,12 +319,46 @@ def payment_success(request):
 
     return redirect('cart')
 
+@login_required
 def profile(request):
+    return render(request, 'profile/profile.html', {"user": request.user})
+
+@login_required
+def orders(request):
     user = request.user
     order =  Order.objects.filter(user=user)
-    order_item = OrderItem.objects.filter(order__in=order).order_by('-order__created_at')
+    order_item = None
+    if user.is_superuser:
+        order_item = OrderItem.objects.all().order_by('-order_id')
+    else:
+        order_item = OrderItem.objects.filter(order__in=order).order_by('-order__created_at')
     context = {
         "user": user,
         "order_item": order_item,
     }
-    return render(request, 'profile.html', context)
+    print(order_item)
+    return render(request, 'profile/orders.html', context)
+
+@login_required
+def reservation(request):
+    user = request.user
+    if user.is_superuser:
+        book = Book_Table.objects.all().order_by('-id')
+    else:
+        book = Book_Table.objects.filter(user=user).order_by('-id')
+    return render(request, 'profile/reservation.html', {"book": book})
+
+@login_required
+def password_change(request):
+    user = request.user
+    if request.method == 'POST':
+        form = PasswordChangeForm(user, request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your password has been changed")
+            return redirect('login')
+        else:
+            for error in list(form.errors.values()):
+                messages.error(request, error)      
+    form = PasswordChangeForm(user)
+    return render(request, 'password_update.html', {'form': form})

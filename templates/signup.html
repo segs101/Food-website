@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-
   <!-- ======================content========================== -->
   <form action="{% url 'signup' %}" method="post">
     {% csrf_token %}
@@ -25,6 +24,7 @@
           <input type="password" name="password1" required="required" placeholder="password">
         </div>
         
+        
         <div class="auth-input">
           <input type="password" name="password2" required="required" placeholder="confirm password">
         </div>
@@ -32,7 +32,6 @@
         <div class="auth-link">
           <p>already have an account? <a href="">sign in instead</a> </p>
         </div>
-        
         <button type="submit" class="enter">Submit</button>
       </div>
     </div>   

@@ -21,7 +21,8 @@
       </div>
       <div class="reservation-form">
         <h2>Reservation Online</h2>
-        <form action="" class="form1" method="POST">
+        <form action="{% url 'book_table' %}" class="form1" method="POST">
+          {% csrf_token %}
           <div class="reserve">
             <input type="text" name="name" placeholder="Enter Your Name">
           </div>
@@ -35,7 +36,11 @@
             <input type="text" name="time" placeholder="Select the Time" onfocus="(this.type='time')">
           </div>
           <div class="reserve">
-            <input type="number" name="people" min="1" max="20" placeholder="How Many People">
+            <select name="table"  aria-placeholder="table">
+              {% for value, label in form.table.field.choices %}
+              <option value="{{ value }}" {% if form.table.value == value %}selected{% endif %}>{{ label }}</option>
+              {% endfor %}
+            </select>
           </div>
           <div>
             <button type="submit" class="book-btn">Book Now</button>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load humanize %}
+<!-- ================================================ -->
+{% block content %}
+  	<div class="profile">
+    	{% include 'profile/profile_link.html' %}
+		<div class="profile-order">	
+			<div>
+				{% for book in book  %}
+				<div class="each-order-reservation">
+					<p>{{book.table}}</p>
+					<p>reservation id : {{book.id}}</p>
+					<p>email: {{book.email}}</p>
+					<p>date: {{book.date}}</p>
+					<p>time: {{book.time}}</p>
+				</div>
+			{% endfor %}
+			</div>	
+		</div>
+  	</div>
+{% endblock content %}

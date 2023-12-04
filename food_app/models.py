@@ -1,3 +1,6 @@
+from ast import mod
+from email.policy import default
+from os import name
 from django.db import models
 from django.core.validators import EmailValidator
 from django.contrib.auth.models import AbstractUser
@@ -89,3 +92,17 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} x {self.product.product_name} in Order {self.order.id}"
+    
+class Book_Table(models.Model): 
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=50)
+    date = models.DateField()
+    time = models.TimeField()
+    table = models.CharField(max_length=20, choices=[                                  ("REGULAR TABLE", "REGULAR TABLE"),
+    ("FAMILY TABLE","FAMILY TABLE"),
+    ("BUSINESS TABLE", "BUSINESS TABLE"),
+    ], default='REGULAR TABLE')
+
+    def __str__(self):
+        return self.name

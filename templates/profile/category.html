@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load humanize %}
+<!-- ================================================ -->
+{% load crispy_forms_tags %}
+{% block content %}
+  <div class="profile">
+    {% include 'profile/profile_link.html' %}
+    <div class="profile-order">
+      <div class="">
+        <div class="d-flex gap-2 flex-wrap mb-2">
+          {% for item in category %}
+            <div class="card p-2 border-dark">
+              <div class="d-flex gap-2">
+                <a href="{% url 'product' item.slug %}" class="text-decoration-none d-flex align-items-center">
+                  <p class="m-0 align-items-center  text-dark">{{item.food_name}}</p>
+                </a>
+                <form method="post" action="{% url 'category_update' item.id %}">
+                  {% csrf_token %}
+                 <button type="submit" class="btn btn-secondary">Edit</button>
+                </form>
+                
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{ item.id }}">
+                  Delete
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal{{ item.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete {{ item.food_name }}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Are you sure you want to delete {{ item.food_name }} from category and all it's content?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <form method="post" action="{% url 'delete_category' item.id %}">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-primary">Yes Delete</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div>
+        <h2 class="text-center m-0">Add Category</h2>
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="flex-form">
+            {{ form|crispy }}
+          </div>
+          <div class="">
+            <button class="btn btn-outline-dark" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+      
+		</div>
+  </div>
+{% endblock content %}

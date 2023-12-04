@@ -10,23 +10,60 @@
       <p>{{foodbrand.description}}</p>
     </div>
     <div class="product-card">
-      
       {% if not product %}
         <p>No item found</p>
       {% else %}
         {% for item in product%}
-        <div class="each-card">
-          <img src="{{item.pics.url}}" alt="">
-          <div class="detail-side">
-            <h3 class="text-capitalize">{{item.product_name}}</h3>
-            <p class="text-capitalize">{{item.description}}</p>
-            <p class="mt-4">₦{{item.price|intcomma }}</p>
-            <form action="{% url 'add-to-cart' item.id %}" method="post">
-              {% csrf_token %}
-              <button type="submit" class="btn2 mb-4 mt-3">add to cart</button>
-            </form>
+          <div class="each-card">
+            <div>
+              <img src="{{item.pics.url}}" alt="">
+            </div>
+            
+            <div class="detail-side">
+              <h3 class="text-capitalize">{{item.product_name}}</h3>
+              <p class="text-capitalize">{{item.description}}</p>
+              <p class="">₦{{item.price|intcomma }}</p>
+              
+              <div class="d-flex flex-wrap gap-2">
+                <form action="{% url 'add-to-cart' item.id %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn2 ">add to cart</button>
+                </form>
+                {% if request.user.is_superuser %}
+                  <form action="{% url 'update_product' item.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-secondary">Edit</button>
+                  </form>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-outline-danger w-100" data-bs-toggle="modal" data-bs-target="#exampleModal{{ item.id }}">
+                    Delete
+                  </button>
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal{{ item.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content bg-dark mt-5">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">Delete {{ item.product_name }}</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure you want to delete {{ item.product_name }} from products and all it's content ?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          <form method="post" action="{% url 'delete_category' item.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Yes Delete</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
           </div>
-        </div>
         {% endfor %}
       {% endif %}
         

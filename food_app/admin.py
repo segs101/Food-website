@@ -18,6 +18,10 @@ class UserAdmin(admin.ModelAdmin):
      
 class CartAdmin(admin.ModelAdmin):
     list_display = ['id','cart', 'product', 'quantity', 'amount']
+    
+
+class Book_TableAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'date', 'time', 'table']
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
@@ -27,3 +31,4 @@ admin.site.register(Cart)
 admin.site.register(CartItem, CartAdmin)
 admin.site.register(Order)
 admin.site.register(OrderItem)
+admin.site.register(Book_Table, Book_TableAdmin)

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+<!-- ================================================ -->
+  <div class="profile">
+    {% include 'profile/profile_link.html' %}
+    <div class="profile-info">
+      <div>
+        <div class="profile-info-input">
+          <p>Full Name: <span>{{user.full_name}}</span></p>
+        </div>
+        <div class="profile-info-input">
+          <p>Email: <span>{{user.email}}</span></p>
+        </div>
+        <div class="profile-info-input">
+          <p>Phone: <span>+123456789</span></p>
+        </div>
+        <div class="profile-info-input">
+          <p>State: <span>Some State</span></p>
+        </div>
+        <div class="profile-info-input">
+          <p>City: <span>Some City</span></p>
+        </div>
+        <div class="profile-info-input">
+          <p>Address: <span>{{user.address}}</span></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+{% endblock content %}

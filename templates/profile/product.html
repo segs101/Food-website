@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load humanize %}
+<!-- ================================================ -->
+{% load crispy_forms_tags %}
+{% block content %}
+  <div class="profile">
+    {% include 'profile/profile_link.html' %}
+    <div class="profile-order">
+      <div>
+        <h2 class="text-center m-0">Add Product</h2>
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="flex-form">
+            {{ form|crispy }}
+          </div>
+          <div class="">
+            <button class="btn btn-outline-dark" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+      
+		</div>
+  </div>
+{% endblock content %}
