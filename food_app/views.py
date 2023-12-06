@@ -4,9 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordChangeForm
 from django.conf import settings
-from django.contrib.auth.decorators import user_passes_test
-
-from admin_app.views import is_admin_or_superuser
 from . forms import *
 from . models import *
 from random import randint
@@ -32,7 +29,6 @@ def product(request, slug):
     foodbrand = get_object_or_404(Category, slug=slug)
     type_slug_value =  slug
     product = Product.objects.filter(type__slug=type_slug_value)
-    print(product)
     context = {
         "foodbrand":foodbrand,
         "product": product,
