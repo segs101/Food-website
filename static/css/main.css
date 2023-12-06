@@ -197,10 +197,10 @@ input[type=checkbox] {
   .nav-links li + li {
     margin-top: 12px;
   }
-  input[type=checkbox]:checked ~ .nav-links {
+  input[type=checkbox]:checked ~ .nav-links{
     display: block;
     background-color: #D8D9DA;
-    top: 50px; 
+    top: 60px; 
     z-index: 888;
   }
 
@@ -209,7 +209,7 @@ input[type=checkbox] {
   }
 
   .dropdown-content{
-    left: 45%;
+    left: 10%;
     transform: translateX(35%);
   }
   .header1{
@@ -218,7 +218,8 @@ input[type=checkbox] {
 
   .respon-button{
     display: block !important;
-    margin-left: 40% !important;
+    float: left !important;
+    /* margin-left: 40% !important; */
 }
 }
 /* ----------------------------styling alret---------------------- */
@@ -678,6 +679,7 @@ input[type=checkbox] {
     padding: 10px 10px;
     max-width: 250px;
     height: auto;
+    min-height: 200px;
     background-color:#3B3B3B;
     color: #f1f4f6;
     border-radius: 0px 10px 10px 0px;
@@ -892,7 +894,7 @@ box-shadow: 0px 26px 14px -13px rgba(115,115,115,0.8);
 .each-cart  img{
     /* width: fit-content; */
     height: 200px;
-    max-width: 200px;
+    max-width: auto;
     border-radius:10px 0 0 10px;
 }
 .each-cart h3{

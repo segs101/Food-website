@@ -90,7 +90,7 @@ def loginPage(request):
             return redirect('profile')
         elif user:
             login(request, user)
-            messages.success(request, 'Welcome back 🎉🎉')
+            messages.success(request, f'Welcome back {request.user.full_name} 🎉🎉')
             return redirect('home')
         else:
             messages.error(request, 'Username or password does not exit 😔😔')
@@ -361,4 +361,4 @@ def password_change(request):
             for error in list(form.errors.values()):
                 messages.error(request, error)      
     form = PasswordChangeForm(user)
-    return render(request, 'password_update.html', {'form': form})
+    return render(request, 'password_reset/password_update.html', {'form': form})

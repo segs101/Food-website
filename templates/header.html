@@ -3,35 +3,36 @@
   <div class="container-fluid">
     <div class="main-navbar">
       <a href="{% url 'home'  %}" ><img src="{%static '/img/logo.png.png' %}" alt="Logo" class="logo"></a>
-      {% if user.is_authenticated %}
-      <div class="respon-button btn0 nav-link">
-        <a href="{% url 'logout' %}" class="hvr-bounce-to-right">Sign out</a>
-      </div>
-      {% else %}
-      <div class="respon-button btn0 nav-link">
-        <a href="{% url 'login' %}" class="hvr-bounce-to-right">Sign in</a>
-      </div>
-      {% endif %}
-      <input type="checkbox" id="checkbox_toggle" />
-      <label for="checkbox_toggle" class="hamburger">&#9776;</label>
-      <ul class="nav-links" id="nav-links">
-        <li class="nav-link"><a href="{% url 'home' %}">Home</a></li>
-        <li class="nav-link dropdown">
-          <a>Dishes <i class="fa-solid fa-caret-down"></i></a>
-          <div class="dropdown-content">
-            {% for item in category %}
-            <a href="{% url 'product' item.slug %}">{{item.food_name}} Menu</a>
-            {% endfor %}
-          </div>
-        </li>
-        <li class="nav-link"><a href="{% url 'book_table' %}">Book a table</a></li>
+      <div class="d-flex justify-content-end">
         {% if user.is_authenticated %}
-        <li class="nav-link"><a href="{% url 'profile' %}">profile</a></li>
-        {% endif %}
-        <li class="nav-link"><a href="{% url 'cart' %}"><i class="fa badge" value={{order_item_count}}>&#xf07a;</i></a></li>
-      </ul>
+        <div class="respon-button btn0 nav-link">
+          <a href="{% url 'logout' %}" class="hvr-bounce-to-right mx-2">Sign out</a>
+        </div>
+        {% else %}
+        <div class="respon-button btn0 nav-link">
+          <a href="{% url 'login' %}" class="hvr-bounce-to-right mx-2">Sign in</a>
+        </div>
+        {% endif %}  
+        <input type="checkbox" id="checkbox_toggle" />
+        <label for="checkbox_toggle" class="hamburger m-auto">&#9776;</label>
+        <ul class="nav-links" id="nav-links">
+          <li class="nav-link"><a href="{% url 'home' %}">Home</a></li>
+          <li class="nav-link dropdown">
+            <a>Dishes <i class="fa-solid fa-caret-down"></i></a>
+            <div class="dropdown-content">
+              {% for item in category %}
+              <a href="{% url 'product' item.slug %}">{{item.food_name}} Menu</a>
+              {% endfor %}
+            </div>
+          </li>
+          <li class="nav-link"><a href="{% url 'book_table' %}">Book a table</a></li>
+          {% if user.is_authenticated %}
+          <li class="nav-link"><a href="{% url 'profile' %}">profile</a></li>
+          {% endif %}
+          <li class="nav-link"><a href="{% url 'cart' %}"><i class="fa badge" value={{order_item_count}}>&#xf07a;</i></a></li>
+        </ul>
+      </div>
       <div class="nav-button">
-        
         {% if user.is_authenticated %}
         <div class="nav-link btn1">
           <a href="{% url 'logout'  %}" class="hvr-bounce-to-right">Sign Out</a>
