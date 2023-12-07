@@ -82,6 +82,10 @@ def loginPage(request):
         user = authenticate(request, email=email, password=password)
         
         if user and user.is_superuser:
+            try:
+                Cart.objects.get(user=user)
+            except Cart.DoesNotExist:
+                Cart.objects.create(user=user)
             login(request, user)
             return redirect('profile')
         elif user:
