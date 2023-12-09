@@ -4,7 +4,7 @@ import datetime
 def site_settings(request):
     today = datetime.date.today()
     year = today.year
-    category = Category.objects.all()
+    category = Category.objects.all().order_by('id')
     return {'category': category, 'year': year}
 
 def order_item_count(request):

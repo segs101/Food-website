@@ -23,8 +23,6 @@ def index(request):
         new = Home_Contact(name=name, email=email, message=message)
         new.save()
     context = {}
-    print(f"DEBUG: MEDIA_ROOT: {settings.MEDIA_ROOT}")
-    print(f"DEBUG: MEDIA_URL: {settings.MEDIA_URL}")
     return render(request, 'main.html', context)
 
 def product(request, slug):

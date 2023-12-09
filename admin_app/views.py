@@ -75,3 +75,18 @@ def update_product(request, id):
             return redirect('product')
     form = ProductForm(instance=product)
     return render(request, 'profile/product.html', {'form': form})
+
+
+@user_passes_test(is_admin_or_superuser)
+def delete_product(request, id):
+    # dictionary for initial data with
+    # field names as keys
+
+    # fetch the object related to passed id
+    obj = get_object_or_404(Product, pk=id)
+    if request.method == "POST":
+        # delete object
+        obj.delete()
+        # after deleting redirect to
+        # redirect to the previous url
+        return redirect(request.META.get('HTTP_REFERER'))
